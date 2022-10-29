@@ -5,6 +5,13 @@ author 'SavSin'
 description 'Custom Blips for any need'
 
 client_scripts {
+    'client/*.lua',
+}
+
+shared_script {
     'Config.lua',
-    'client/main.lua'
+}
+
+server_scripts {
+    'server/*.lua',
 }
