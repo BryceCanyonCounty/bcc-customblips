@@ -20,6 +20,7 @@ A simple script that allows for a server owner to place blips on the map at desi
     -- Set jobs to 0 to allow for all
     name = "Tubleweed Sheriff Office",
     ID = 1047294027,
+    BlipName = "blip_mp_bounty_hunter_introduction",
     Pos = {x = -5529.71, y = -2927.65, z = -1.36},
     Jobs = { "police" }
 },
@@ -33,7 +34,7 @@ A simple script that allows for a server owner to place blips on the map at desi
 
 #### DEPENDENCIES
 
-None
+[VORP-Utilities](https://github.com/VORPCORE/vorp_utils) - Thanks Byte for making it even easier to create blips lol
 
 #### SUPPORT
 
