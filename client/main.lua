@@ -1,3 +1,9 @@
+local VORPutils = {}
+
+TriggerEvent("getUtils", function(utils)
+    VORPutils = utils
+end)
+
 local playerJob = nil
 
 RegisterNetEvent("vorp:SelectedCharacter")
@@ -19,13 +25,10 @@ function CreateBlips(job)
         for k, v in pairs(Config.Blips) do
             if v.Jobs == 0 or tableContains(v.Jobs, job) then
                 if v.blipHandle == nil then
-                    v.blipHandle = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.Pos.x, v.Pos.y, v.Pos.z)
-                    SetBlipSprite(v.blipHandle, v.ID, true)
-                    SetBlipScale(v.blipHandle, 0.2)
-                    Citizen.InvokeNative(0x9CB1A1623062F402, v.blipHandle, v.Name)
+                    v.blipHandle = VORPutils.Blips:SetBlip(v.Name, v.BlipName, 0.2, v.Pos.x, v.Pos.y, v.Pos.z)
                 end
             elseif v.Jobs ~= 0 and not tableContains(v.Jobs, job) and v.blipHandle ~= nil then
-                RemoveBlip(v.blipHandle)
+                v.blipHandle:Remove()
                 v.blipHandle = nil
             end
         end
@@ -48,7 +51,7 @@ AddEventHandler('onResourceStop', function(resourceName)
     end
     for _, v in pairs(Config.Blips) do
         if v.blipHandle then
-            RemoveBlip(v.blipHandle)
+            v.blipHandle:Remove()
         end
     end
 end)
