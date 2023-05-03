@@ -8,10 +8,10 @@ local playerJob = nil
 
 RegisterNetEvent("vorp:SelectedCharacter")
 AddEventHandler("vorp:SelectedCharacter", function(charid)
-    TriggerServerEvent("mwg_customblips:getJob")
+    TriggerServerEvent("bcc-customblips:getJob")
 end)
 
-RegisterNetEvent("mwg_customblips:returnJob", function(job)
+RegisterNetEvent("bcc-customblips:returnJob", function(job)
     CreateBlips(job)
 end)
 

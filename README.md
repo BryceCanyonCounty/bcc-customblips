@@ -28,8 +28,8 @@ A simple script that allows for a server owner to place blips on the map at desi
 
 #### INSTALATION
 
-- place `mwg_customblips` in your resources folder
-- add `ensure mwg_customblips` to your `resources.cfg`.
+- place `bcc-customblips` in your resources folder
+- add `ensure bcc-customblips` to your `resources.cfg`.
 - restart server, enjoy.
 
 #### DEPENDENCIES
