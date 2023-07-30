@@ -12,3 +12,11 @@ RegisterServerEvent("bcc-customblips:getJob", function()
   print(Character.job)
   TriggerClientEvent("bcc-customblips:returnJob", _source, Character.job)
 end)
+
+VORPcore.addRpcCallback('CheckPlayerJobGroup', function(source, cb)
+  local src = source
+  local Character = VORPcore.getUser(src).getUsedCharacter
+  local result = { PlayerJob = Character.job, PlayerGroup = Character.group }
+
+  cb(result)
+end)
