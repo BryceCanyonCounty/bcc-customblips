@@ -8,21 +8,29 @@ A simple script that allows for a server owner to place blips on the map at desi
 
 - Configure blip placement by config
 - Ability to job lock blips (only show to those in the job)
-  - Switching Jobs will remove or activate blips based on new job
-  - Uses the same job switch event that vorp_crafting checks
-- Select your blip by hash. You can find the blip ID's [here](https://filmcrz.github.io/blips/)
+
+- Ability to show blips to groups. Enable Groups in the settings (near the top)
+
+  - Note: If groups are enabled players with the job will still see the blip (if that is not desired change the job to random text)
+  - For example if the job is "police" and the group is "admin". The blip will be displayed for all police and admins.
+  - To only show to admins set the job option to a job that doesn't exist on your server. (Job cannot be left empty when using groups or it will be available for all)
+
+- Ability to set colors
+- Select your blip by hash. You can find the blip ID's [here](https://github.com/femga/rdr3_discoveries/tree/master/useful_info_from_rpfs/textures/blips_mp)
 
 #### Configuration
 
+In the config.lua file I have left many examples of different configurations utilizing the Police Department buildings. Feel free to remove those and enter your own!
+
 ```lua
 {
-    -- Set jobs to {'Job', 'Job2'} to lock to specific jobs
-    -- Set jobs to 0 to allow for all
-    name = "Tubleweed Sheriff Office",
-    ID = 1047294027,
-    BlipName = "blip_mp_bounty_hunter_introduction",
-    Pos = {x = -5529.71, y = -2927.65, z = -1.36},
-    Jobs = { "police" }
+    Name = 'Valentine Sheriff Office',      -- Name shown on map
+    BlipHash = 1047294027,                  -- Name of blip
+    Pos = vector3(-288.07, 804.33, 119.39), -- Location of the blip
+    Jobs = { 'police' },                    -- Jobs allowed to see the blip. {} for public
+    Group = { 'admin' },                    -- Only show based on VORP character group. {} for public. Only works if UseGroups is true.
+    BlipColor = 'LIGHT_BLUE',               -- Use the table below to select your color
+    BlipDistance = 100.0                    -- Distance the blip is visible from. 0 for always visible
 },
 ```
 
@@ -32,14 +40,10 @@ A simple script that allows for a server owner to place blips on the map at desi
 - add `ensure bcc-customblips` to your `resources.cfg`.
 - restart server, enjoy.
 
-#### DEPENDENCIES
-
-[VORP-Utilities](https://github.com/VORPCORE/vorp_utils) - Thanks Byte for making it even easier to create blips lol
-
 #### SUPPORT
 
 Feel free to create an issue if you need assitance or have issue
 
 #### Credits
 
-- Vorp dev team for information on how to place blips.
+- Apollyon for proof reading my incredible typos

@@ -1,57 +1,68 @@
-local VORPutils = {}
+VORPCore = {}
 
-TriggerEvent("getUtils", function(utils)
-    VORPutils = utils
+local PlayerJob = nil
+local PlayerGroup = nil
+
+TriggerEvent('getCore', function(core)
+    VORPCore = core
 end)
 
-local playerJob = nil
+RegisterCommand('make_ready', function()
+    VORPCore.RpcCall('CheckPlayerJobGroup', function(result)
+        PlayerJob = result.PlayerJob
+        PlayerGroup = result.PlayerGroup
+        CreateBlips()
+    end)
+end)
 
 RegisterNetEvent("vorp:SelectedCharacter")
 AddEventHandler("vorp:SelectedCharacter", function(charid)
-    TriggerServerEvent("bcc-customblips:getJob")
+    VORPCore.RpcCall('CheckPlayerJobGroup', function(result)
+        PlayerJob = result.PlayerJob
+        PlayerGroup = result.PlayerGroup
+        CreateBlips()
+    end)
 end)
 
-RegisterNetEvent("bcc-customblips:returnJob", function(job)
-    CreateBlips(job)
-end)
+function CreateBlips()
+    while true do
+        local player = PlayerPedId()
+        local pCoords = GetEntityCoords(player)
+        for k, BlipSettings in pairs(Config.Blips) do
+            if CheckJob(BlipSettings, PlayerJob) or (Config.UseGroups and CheckGroup(BlipSettings, PlayerGroup)) then
+                local distance = #(pCoords - BlipSettings.Pos)
 
-RegisterNetEvent("vorp:setjob")
-AddEventHandler("vorp:setjob", function(job)
-    CreateBlips(job)
-end)
+                -- Distance not enabled
+                if BlipSettings.BlipDistance < 1 or BlipSettings.BlipDistance == nil then goto NEXT end
 
-function CreateBlips(job)
-    Citizen.CreateThread(function()
-        for k, v in pairs(Config.Blips) do
-            if v.Jobs == 0 or tableContains(v.Jobs, job) then
-                if v.blipHandle == nil then
-                    v.blipHandle = VORPutils.Blips:SetBlip(v.Name, v.BlipName, 0.2, v.Pos.x, v.Pos.y, v.Pos.z)
+                -- Distance enabled and within range
+                if distance <= BlipSettings.BlipDistance then goto NEXT end
+
+                -- Distance enabled and out of range
+                goto END
+
+                ::NEXT::
+                if BlipSettings.BlipHandle == nil then
+                    BlipSettings.BlipHandle = AddBlip(BlipSettings)
                 end
-            elseif v.Jobs ~= 0 and not tableContains(v.Jobs, job) and v.blipHandle ~= nil then
-                v.blipHandle:Remove()
-                v.blipHandle = nil
+
+                ::END::
+                if BlipSettings.BlipHandle and BlipSettings.BlipDistance > 1 then
+                    if distance > BlipSettings.BlipDistance then
+                        RemoveBlip(BlipSettings.BlipHandle)
+                        BlipSettings.BlipHandle = nil
+                    end
+                end
             end
         end
-    end)
-end
 
-function tableContains(table, key)
-    local isPresent = false
-    for _, v in pairs(table) do
-        if v == key then
-            isPresent = true
-        end
+        Wait(1000)
     end
-    return isPresent
 end
 
 AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
         return
     end
-    for _, v in pairs(Config.Blips) do
-        if v.blipHandle then
-            v.blipHandle:Remove()
-        end
-    end
+    ClearBlips()
 end)
