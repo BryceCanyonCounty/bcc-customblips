@@ -7,14 +7,6 @@ TriggerEvent('getCore', function(core)
     VORPCore = core
 end)
 
-RegisterCommand('make_ready', function()
-    VORPCore.RpcCall('CheckPlayerJobGroup', function(result)
-        PlayerJob = result.PlayerJob
-        PlayerGroup = result.PlayerGroup
-        CreateBlips()
-    end)
-end)
-
 RegisterNetEvent("vorp:SelectedCharacter")
 AddEventHandler("vorp:SelectedCharacter", function(charid)
     VORPCore.RpcCall('CheckPlayerJobGroup', function(result)
