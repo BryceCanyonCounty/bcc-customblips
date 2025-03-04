@@ -10,6 +10,7 @@ function CreateBlips()
     local pCoords = GetEntityCoords(player)
     for k, BlipSettings in pairs(Config.Blips) do
       local removeBlip = false
+      local distance = #(pCoords - BlipSettings.Pos)
 
       -- Job/Group Check
       if(BlipSettings.Restriction > 0 and
@@ -21,8 +22,6 @@ function CreateBlips()
 
       -- Distance Checks
       if BlipSettings.BlipDistance < 1 or BlipSettings.BlipDistance == nil then goto NEXT end
-      
-      local distance = #(pCoords - BlipSettings.Pos)
       if distance <= BlipSettings.BlipDistance then goto NEXT end
 
       if distance > BlipSettings.BlipDistance then
