@@ -7,8 +7,7 @@ lua54 'yes'
 description 'Custom Blips for any need'
 
 client_scripts {
-    'client/helpers.lua',
-    'client/main.lua',
+    'client/*.lua',
 }
 
 shared_script {
@@ -19,4 +18,4 @@ server_scripts {
     'server/*.lua',
 }
 
-version = "2.0.0"
+version = "3.0.0"
