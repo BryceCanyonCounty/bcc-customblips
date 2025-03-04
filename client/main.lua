@@ -11,23 +11,21 @@ function CreateBlips()
         for k, BlipSettings in pairs(Config.Blips) do
           local removeBlip = false
 
-          -- Requirement Check
-          if(BlipSettings.Restriction > 0 and next(BlipSettings.Requirements)) then
-            if not Core.Callback.TriggerAwait('bcc-customblips:CheckRequirements', BlipSettings.Restriction, BlipSettings.Requirements) then
-              removeBlip = true
-              goto END 
-            end
+          -- Job/Group Check
+          if(BlipSettings.Restriction > 0 and
+            next(BlipSettings.Requirements) and
+            not Core.Callback.TriggerAwait('bcc-customblips:CheckRequirements', BlipSettings.Restriction, BlipSettings.Requirements)) then
+            removeBlip = true
+            goto END
           end
 
-          -- Distance Disabled
+          -- Distance Checks
           if BlipSettings.BlipDistance < 1 or BlipSettings.BlipDistance == nil then goto NEXT end
           
           local distance = #(pCoords - BlipSettings.Pos)
-          -- Distance enabled and within range
           if distance <= BlipSettings.BlipDistance then goto NEXT end
 
-          -- Distance enabled and out of range
-          if BlipSettings.BlipDistance >= 1 and distance > BlipSettings.BlipDistance then
+          if distance > BlipSettings.BlipDistance then
             removeBlip = true
             goto END
           end
