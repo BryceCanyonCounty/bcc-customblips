@@ -1,48 +1,48 @@
 local Core = exports.vorp_core:GetCore()
 
 RegisterNetEvent("vorp:SelectedCharacter", function(charid)
-    CreateBips()
+    CreateBlips()
  end)
 
 function CreateBlips()
-    while true do
-        local player = PlayerPedId()
-        local pCoords = GetEntityCoords(player)
-        for k, BlipSettings in pairs(Config.Blips) do
-          local removeBlip = false
+  while true do
+    local player = PlayerPedId()
+    local pCoords = GetEntityCoords(player)
+    for k, BlipSettings in pairs(Config.Blips) do
+      local removeBlip = false
 
-          -- Job/Group Check
-          if(BlipSettings.Restriction > 0 and
-            next(BlipSettings.Requirements) and
-            not Core.Callback.TriggerAwait('bcc-customblips:CheckRequirements', BlipSettings.Restriction, BlipSettings.Requirements)) then
-            removeBlip = true
-            goto END
-          end
+      -- Job/Group Check
+      if(BlipSettings.Restriction > 0 and
+        next(BlipSettings.Requirements) and
+        not Core.Callback.TriggerAwait('bcc-customblips:CheckRequirements', BlipSettings.Restriction, BlipSettings.Requirements)) then
+        removeBlip = true
+        goto END
+      end
 
-          -- Distance Checks
-          if BlipSettings.BlipDistance < 1 or BlipSettings.BlipDistance == nil then goto NEXT end
-          
-          local distance = #(pCoords - BlipSettings.Pos)
-          if distance <= BlipSettings.BlipDistance then goto NEXT end
+      -- Distance Checks
+      if BlipSettings.BlipDistance < 1 or BlipSettings.BlipDistance == nil then goto NEXT end
+      
+      local distance = #(pCoords - BlipSettings.Pos)
+      if distance <= BlipSettings.BlipDistance then goto NEXT end
 
-          if distance > BlipSettings.BlipDistance then
-            removeBlip = true
-            goto END
-          end
+      if distance > BlipSettings.BlipDistance then
+        removeBlip = true
+        goto END
+      end
 
-          ::NEXT::
-          if BlipSettings.BlipHandle == nil then
-              BlipSettings.BlipHandle = AddBlip(BlipSettings)
-          end
+      ::NEXT::
+      if BlipSettings.BlipHandle == nil then
+          BlipSettings.BlipHandle = AddBlip(BlipSettings)
+      end
 
-          ::END::
-          if BlipSettings.BlipHandle and removeBlip then
-            RemoveBlip(BlipSettings.BlipHandle)
-            BlipSettings.BlipHandle = nil
-          end
-
-        Wait(1000)
+      ::END::
+      if BlipSettings.BlipHandle and removeBlip then
+        RemoveBlip(BlipSettings.BlipHandle)
+        BlipSettings.BlipHandle = nil
+      end
     end
+    Wait(1000)
+  end
 end
 
 function ClearBlips()
@@ -64,8 +64,8 @@ function AddBlip(BlipSettings)
 end
 
 AddEventHandler('onResourceStop', function(resourceName)
-    if (GetCurrentResourceName() ~= resourceName) then
-        return
-    end
-    ClearBlips()
+  if (GetCurrentResourceName() ~= resourceName) then
+    return
+  end
+  ClearBlips()
 end)

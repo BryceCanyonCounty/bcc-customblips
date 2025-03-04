@@ -20,7 +20,7 @@ In the config.lua file I have left many examples of different configurations uti
     Name = 'Valentine Sheriff Office',      -- Name shown on map
     BlipHash = 1047294027,                  -- Name of blip
     Pos = vector3(-288.07, 804.33, 119.39), -- Location of the blip
-    Restriction = 1                         -- 0 = None, 1 = Job, 2 = Group
+    Restriction = 1,                         -- 0 = None, 1 = Job, 2 = Group
     Requirements = { 'police' },            -- Jobs allowed to see the blip. {} for public
     BlipColor = 'LIGHT_BLUE',               -- Use the table below to select your color
     BlipDistance = 100.0                    -- Distance the blip is visible from. 0 for always visible

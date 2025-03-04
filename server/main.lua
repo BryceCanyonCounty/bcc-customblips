@@ -2,8 +2,8 @@ local Core = exports.vorp_core:GetCore()
 
 Core.Callback.Register('bcc-customblips:CheckRequirements', function(source, cb, restriction, requirements)
   -- Error Checking
-  if type(requirements) ~= 'table' then throw('Requirements must be a table', 2) end
-  if type(restriction) ~= 'number' then throw('Restriction must be a number', 2) end
+  if type(requirements) ~= 'table' then error('Requirements must be a table', 2) end
+  if type(restriction) ~= 'number' then error('Restriction must be a number', 2) end
   
   local src = source
   local user = Core.getUser(src)
