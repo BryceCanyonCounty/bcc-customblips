@@ -1,14 +1,12 @@
 Config = {}
 
-Config.UseGroups = true
-
 Config.Blips = {
     {
         Name = 'Valentine Sheriff Office',      -- Name shown on map
         BlipHash = 1047294027,                  -- Name of blip
         Pos = vector3(-288.07, 804.33, 119.39), -- Location of the blip
-        Jobs = { 'police' },                    -- Jobs allowed to see the blip. {} for public
-        Group = { 'user' },                     -- Only show based on VORP character group. {} for public.
+        Restriction = 1,                         -- 0 = None, 1 = Job, 2 = Group
+        Requirements = { 'police' },            -- Jobs allowed to see the blip. {} for public
         BlipColor = 'LIGHT_BLUE',               -- Use the table below to select your color
         BlipDistance = 100.0                    -- Distance the blip is visible from. 0 for always visible
     },
@@ -16,8 +14,8 @@ Config.Blips = {
         Name = 'Saint Dennis Sheriff Office',
         BlipHash = 1047294027,
         Pos = vector3(2513.02, -1309.21, 48.97),
-        Jobs = { 'police' },
-        Group = {},
+        Restriction = 2,
+        Requirements = { 'admin' },
         BlipColor = 'PURPLE',
         BlipDistance = 100.0,
     },
@@ -25,8 +23,8 @@ Config.Blips = {
         Name = 'Blackwater Sheriff Office',
         BlipHash = 1047294027,
         Pos = vector3(-762.14, -1269.43, 44.07),
-        Jobs = { 'police' },
-        Group = {},
+        Restriction = 0,
+        Requirements = {},
         BlipColor = 'ORANGE',
         BlipDistance = 100.0,
     },
@@ -34,8 +32,8 @@ Config.Blips = {
         Name = 'Armadillo Sheriff Office',
         BlipHash = 1047294027,
         Pos = vector3(-3621.78, -2603.33, -13.29),
-        Jobs = {},
-        Group = {},
+        Restriction = 0,
+        Requirements = {},
         BlipColor = 'DARK_RED',
         BlipDistance = 100.0,
     },
@@ -43,8 +41,8 @@ Config.Blips = {
         Name = 'Tubleweed Sheriff Office',
         BlipHash = 1047294027,
         Pos = vector3(-5529.71, -2927.65, -1.36),
-        Jobs = { 'police' },
-        Group = {},
+        Restriction = 0,
+        Requirements = {},
         BlipColor = 'PINK',
         BlipDistance = 100.0,
     },
@@ -52,8 +50,8 @@ Config.Blips = {
         Name = 'Strawberry Sheriff Office',
         BlipHash = 1047294027,
         Pos = vector3(-1810.44, -349.6, 164.65),
-        Jobs = { 'police' },
-        Group = {},
+        Restriction = 0,
+        Requirements = {},
         BlipColor = 'WHITE',
         BlipDistance = 100.0,
     },
@@ -61,8 +59,8 @@ Config.Blips = {
         Name = 'Annesburg Sheriff Office',
         BlipHash = 1047294027,
         Pos = vector3(2906.6, 1312.02, 44.94),
-        Jobs = { 'police' },
-        Group = {},
+        Restriction = 0,
+        Requirements = {},
         BlipColor = 'PINKISH',
         BlipDistance = 100.0,
     },
@@ -70,8 +68,8 @@ Config.Blips = {
         Name = 'Rhodes Sheriff Office',
         BlipHash = 1047294027,
         Pos = vector3(1361.01, -1300.44, 77.76),
-        Jobs = {},
-        Group = {},
+        Restriction = 0,
+        Requirements = {},
         BlipColor = 'DARK_GREEN',
         BlipDistance = 0,
     }

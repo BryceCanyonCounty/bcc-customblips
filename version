@@ -1,0 +1,13 @@
+<2.0>
+
+- Essentially a rewrite.
+- Updated to new core exports
+- Revamped the Restriction & Requirements checks for each blip.
+  - It now has the option to set each individual blips as public, job locked, or group locked.
+  - I've consolidated the "requirements" in to a single table to help with confusion over which restriction is in place.
+  - Updated some of the distance logic within the client side to help with performance by checking global vars first before doing a distance check.
+- Added Version checker.
+
+<1.0>
+
+- Initial Release
