@@ -1,4 +1,5 @@
 local Core = exports.vorp_core:GetCore()
+local BccUtils = exports['bcc-utils'].initiate()
 
 Core.Callback.Register('bcc-customblips:CheckRequirements', function(source, cb, restriction, requirements)
   -- Error Checking
@@ -23,3 +24,6 @@ function TableContains(table, value)
   end
   return false
 end
+
+local repo = 'https://github.com/BryceCanyonCounty/bcc-customblips'
+BccUtils.Versioner.checkRelease(GetCurrentResourceName(), repo)
