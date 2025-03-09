@@ -26,4 +26,4 @@ function TableContains(table, value)
 end
 
 local repo = 'https://github.com/BryceCanyonCounty/bcc-customblips'
-BccUtils.Versioner.checkRelease(GetCurrentResourceName(), repo)
+BccUtils.Versioner.checkFile(GetCurrentResourceName(), repo)

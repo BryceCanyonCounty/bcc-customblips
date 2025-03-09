@@ -27,6 +27,11 @@ In the config.lua file I have left many examples of different configurations uti
 },
 ```
 
+### Dependancies
+
+- Vorp Core
+- BCC-Utils
+
 #### INSTALATION
 
 - place `bcc-customblips` in your resources folder
